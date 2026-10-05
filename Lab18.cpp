@@ -69,45 +69,89 @@ public:
 
     }
 
-~Movie(){ //DESTRUCTION
-    Review *current = head;
+    ~Movie(){ //DESTRUCTION
+        Review *current = head;
 
-    while (current != nullptr){
-        head = current -> next;
-        delete current;
-        current = head;
-    }
-    head = nullptr;
-}
-
-//copy constructor
-Movie(const Movie &otherMovie){
-    title = otherMovie.title;
-    head = nullptr;
-
-    Review *current = otherMovie.head;
-
-    while (current != nullptr){
-        Review *newReview = new Review;
-
-        newReview -> rating = current -> rating;
-        newReview -> reviewComment = current -> reviewComment;
-        newReview -> next = nullptr;
-
-        if (head == nullptr){
-            head = newReview;
+        while (current != nullptr){
+            head = current -> next;
+            delete current;
+            current = head;
         }
-        else {
-            Review *end = head;
+        head = nullptr;
+    }
 
-            while(end -> next != nullptr){
-                end = end -> next;
+    //copy constructor
+    Movie(const Movie &otherMovie){
+        title = otherMovie.title;
+        head = nullptr;
+
+        Review *current = otherMovie.head;
+
+        while (current != nullptr){
+            Review *newReview = new Review;
+
+            newReview -> rating = current -> rating;
+            newReview -> reviewComment = current -> reviewComment;
+            newReview -> next = nullptr;
+
+            if (head == nullptr){
+                head = newReview;
+            }
+            else {
+                Review *end = head;
+
+                while(end -> next != nullptr){
+                    end = end -> next;
+                }
+
+                end -> next = newReview;
+            }
+        }
+    }
+
+    //copy assignment operator
+    Movie& operator=(const Movie &otherMovie){
+        if (this != &otherMovie){ //make sure its not the same object
+            //Delete the current list
+            Review *current = head;
+
+            while (current != nullptr){
+                head = current -> next;
+                delete current;
+                current = head;
             }
 
-            end -> next = newReview;
+            title = otherMovie.title;
+            head = nullptr;
+
+            current = otherMovie.head;
+
+            while (current != nullptr){
+                Review *newReview = new Review;
+
+                newReview -> rating = current -> rating;
+                newReview -> reviewComment = current ->  reviewComment;
+                newReview -> next = nullptr;
+
+                if (head == nullptr){
+                    head = newReview;
+                }
+                else {
+                    Review *end = head;
+
+                    while (end -> next != nullptr){
+                        end = end -> next;
+                    }
+
+                    end -> next = newReview;
+                }
+
+                current = current -> next;
+            }
         }
+
+        return *this;
     }
-}
 
 
 };
