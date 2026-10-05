@@ -29,7 +29,45 @@ public:
         head = nullptr;
     }
 
+    void addReviews(double rating, string reviewComment){
+        Review *newReview = new Review; //dynamically creates node
 
+        newReview -> rating = rating;
+        newReview -> reviewComment = reviewComment;
+        newReview -> next = head;
+
+        head = newReview;
+    }
+
+    void displayReviews() {
+        cout << "Movie Title: " << title << endl;
+        Review *current = head;
+        
+        double total = 0.0;
+        int count = 0;
+        int reviewNumber = 1;
+
+        while(current != nullptr){
+            //outputting while there is a review
+            cout << "Review #" << reviewNumber << ": ";
+            cout << fixed << setprecision(1) << current -> rating;
+            cout << ": " << current -> reviewComment << endl;
+
+            //for calculate average
+            total += current -> rating;
+            count++;
+            reviewNumber++;
+            current = current -> next;
+        }
+
+        if (count > 0) {
+            double averageRating = total / count;
+
+            cout << "Average: ";
+            cout << fixed << setprecision(1) << averageRating << endl;
+        }
+
+    }
 };
 
 
