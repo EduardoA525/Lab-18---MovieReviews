@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <fstream>
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -158,6 +159,23 @@ public:
 
 
 int main(){
+
+    ifstream fin;
+    fin.open("input.txt");
+
+    if (fin.good()){
+        string reviewComment;
+
+        while(getline(fin, reviewComment)){
+            cout << reviewComment << endl; //test
+        }
+
+        fin.close();
+    }
+    else {
+        cout << "Error: File not found. Whoops!" << endl;
+    }
+
 
     return 0;
 }
