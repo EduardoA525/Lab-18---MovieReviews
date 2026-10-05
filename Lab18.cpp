@@ -44,7 +44,7 @@ public:
     }
 
     void displayReviews() {
-        cout << "Movie Title: " << title << endl;
+        cout << "\nMovie Title: " << title << endl;
         Review *current = head;
         
         double total = 0.0;
@@ -70,7 +70,6 @@ public:
             cout << "Average: ";
             cout << fixed << setprecision(1) << averageRating << endl;
         }
-
     }
 
     ~Movie(){ //DESTRUCTION
@@ -153,15 +152,11 @@ public:
                 current = current -> next;
             }
         }
-
         return *this;
     }
-
-
 };
 
 int main(){
-
     srand(time(0));
 
     ifstream fin;
@@ -178,6 +173,7 @@ int main(){
 
         string reviewComment;
 
+        //For loop for backrooms
         for (int i = 0; i < TOTAL_MOVIES; i++){
             getline(fin, reviewComment);
 
@@ -185,15 +181,43 @@ int main(){
 
             movies[0].addReviews(rating, reviewComment);
         }
+        movies[0].displayReviews();
 
-        movies[0].displayReviews(); //test
+        //For loop for Spider-Man 3
+        for (int i = 0; i < TOTAL_MOVIES; i++){
+            getline(fin, reviewComment);
+
+            double rating = (rand() % 41 + 10) / 10.0;
+
+            movies[1].addReviews(rating, reviewComment);
+        }
+        movies[1].displayReviews();
+
+        //For loop for Resident Evil
+        for (int i = 0; i < TOTAL_MOVIES; i++){
+            getline(fin, reviewComment);
+
+            double rating = (rand() % 41 + 10) / 10.0;
+
+            movies[2].addReviews(rating, reviewComment);
+        }
+        movies[2].displayReviews();
+
+        //For loop for Forgotten Island
+        for (int i = 0; i < TOTAL_MOVIES; i++){
+            getline(fin, reviewComment);
+
+            double rating = (rand() % 41 + 10) / 10.0;
+
+            movies[3].addReviews(rating, reviewComment);
+        }
+        movies[3].displayReviews();
 
         fin.close();
     }
     else {
         cout << "Error: File not found. Whoops!" << endl;
     }
-
 
     return 0;
 }
