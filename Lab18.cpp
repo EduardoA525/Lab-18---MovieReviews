@@ -68,6 +68,48 @@ public:
         }
 
     }
+
+~Movie(){ //DESTRUCTION
+    Review *current = head;
+
+    while (current != nullptr){
+        head = current -> next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
+}
+
+//copy constructor
+Movie(const Movie &otherMovie){
+    title = otherMovie.title;
+    head = nullptr;
+
+    Review *current = otherMovie.head;
+
+    while (current != nullptr){
+        Review *newReview = new Review;
+
+        newReview -> rating = current -> rating;
+        newReview -> reviewComment = current -> reviewComment;
+        newReview -> next = nullptr;
+
+        if (head == nullptr){
+            head = newReview;
+        }
+        else {
+            Review *end = head;
+
+            while(end -> next != nullptr){
+                end = end -> next;
+            }
+
+            end -> next = newReview;
+        }
+    }
+}
+
+
 };
 
 
