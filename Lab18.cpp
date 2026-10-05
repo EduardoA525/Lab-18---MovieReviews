@@ -7,9 +7,12 @@
 #include <iomanip>
 #include <fstream>
 #include <cstdlib>
+#include <vector>
 #include <ctime>
 
 using namespace std;
+
+const int TOTAL_MOVIES = 3;
 
 //Start with struct
 struct Review {
@@ -157,18 +160,33 @@ public:
 
 };
 
-
 int main(){
+
+    srand(time(0));
 
     ifstream fin;
     fin.open("input.txt");
 
     if (fin.good()){
+
+        vector<Movie> movies;
+
+        movies.push_back(Movie("Backrooms"));
+        movies.push_back(Movie("Spider-Man 3"));
+        movies.push_back(Movie("Resident Evil"));
+        movies.push_back(Movie("Forgotten Island"));
+
         string reviewComment;
 
-        while(getline(fin, reviewComment)){
-            cout << reviewComment << endl; //test
+        for (int i = 0; i < TOTAL_MOVIES; i++){
+            getline(fin, reviewComment);
+
+            double rating = (rand() % 41 + 10) / 10.0;
+
+            movies[0].addReviews(rating, reviewComment);
         }
+
+        movies[0].displayReviews(); //test
 
         fin.close();
     }
